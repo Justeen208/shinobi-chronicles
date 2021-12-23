@@ -659,7 +659,7 @@ function rankUp(): bool {
 
 				if(!$player->battle_id) {
 				    try {
-                        $opponent = new AI($system, $opponents[$player->exam_stage]);
+                        $opponent = new NPC($system, $opponents[$player->exam_stage]);
                         $opponent->loadData();
                         Battle::start($system, $player, $opponent, Battle::TYPE_AI_RANKUP);
                     } catch(Exception $e) {
@@ -727,7 +727,7 @@ function rankUp(): bool {
 
                 if(!$player->battle_id) {
                     try {
-                        $opponent = new AI($system, $opponent_id);
+                        $opponent = new NPC($system, $opponent_id);
                         $opponent->loadData();
                         Battle::start($system, $player, $opponent, Battle::TYPE_AI_RANKUP);
                     } catch(Exception $e) {
