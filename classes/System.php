@@ -371,7 +371,6 @@ class System {
     }
 
 
-
     /* function message(message, force_message)
 
         Stores a message for display later.
@@ -406,6 +405,20 @@ class System {
             return true;
         }
         return true;
+    }
+
+    /**
+     * @param string $page_name
+     * @return string
+     * @throws Exception
+     */
+    public function getUrl(string $page_name): string {
+        $id = self::PAGE_IDS[$page_name] ?? null;
+        if($id == null) {
+            throw new Exception("Invalid page name!");
+        }
+
+        return $this->link . '?id=' . $id;
     }
 
     /**
