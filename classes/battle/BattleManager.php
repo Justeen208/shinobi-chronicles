@@ -59,8 +59,6 @@ class BattleManager {
 
     private Battle $battle;
 
-    private bool $is_api_request;
-
     public User $player;
     public Fighter $opponent;
 
@@ -401,6 +399,8 @@ class BattleManager {
             $this->actions->runAttackPhaseActions();
         }
 
+        $this->setEffectDescriptions();
+
         // Update battle
         $this->finishTurn();
     }
@@ -457,7 +457,7 @@ class BattleManager {
     /**
      * @throws Exception
      */
-    private function processTurnEffects() {
+    private function processTurnEffects(): void {
         // Run turn effects
         $this->effects->applyActiveEffects($this->battle->player1, $this->battle->player2);
 
@@ -471,6 +471,32 @@ class BattleManager {
             }
         }
     }
+
+    private function setEffectDescriptions(): void {
+        if($this->effects->hasDisplays($this->battle->player1)) {
+            $this->battle->current_turn_log->addFighterAppliedEffectDescription(
+                $this->battle->player1,
+                $this->actions->parseCombatText(
+                // TODO: This is probably not right
+                    $this->effects->getDisplayText($this->battle->player1),
+                    $this->battle->player1,
+                    $this->battle->player2
+                )
+            );
+        }
+        if($this->effects->hasDisplays($this->battle->player2)) {
+            $this->battle->current_turn_log->addFighterAppliedEffectDescription(
+                $this->battle->player2,
+                $this->actions->parseCombatText(
+                // TODO: This is probably not right
+                    $this->effects->getDisplayText($this->battle->player2),
+                    $this->battle->player2,
+                    $this->battle->player1
+                )
+            );
+        }
+    }
+
 
     protected function stopBattle() {
         $this->battle->winner = Battle::DRAW;
