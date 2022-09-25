@@ -42,6 +42,17 @@ $clan_positions = [
 
 ?>
 
+<style>
+    .resourceBarContainer {
+        display: flex;
+        height: 6px;
+        width: 250px;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+    }
+</style>
+
 <table class='profile_table table'>
 <tr>
     <td style='width:50%;text-align:center;'>
@@ -58,7 +69,7 @@ $clan_positions = [
             <?php endif; ?>
         </span><br />
 
-        <div style='height:6px;width:250px;border-style:solid;border-width:1px;border-radius: 4px;'>
+        <div class='resourceBarContainer'>
             <progress
                 id='healthbar'
                 style='accent-color:#C00000;height:6px;width: 100%;'
@@ -73,7 +84,7 @@ $clan_positions = [
             <?php endif; ?>
         </span><br />
 
-        <div style='height:6px;width:250px;border-style:solid;border-width:1px;border-radius: 4px;'>
+        <div class='resourceBarContainer'>
             <progress
                 id='chakrabar'
                 style='accent-color:#0000B0;height:6px;width:100%;'
@@ -88,7 +99,7 @@ $clan_positions = [
             <?php endif; ?>
         </span><br />
 
-        <div style='height:6px;width:250px;border-style:solid;border-width:1px;border-radius: 4px;'>
+        <div class='resourceBarContainer'>
         <progress
             id='staminabar'
             style='accent-color:#00B000;height:6px;width:100%;'
