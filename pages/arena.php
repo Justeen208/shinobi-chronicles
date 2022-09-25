@@ -91,7 +91,7 @@ function arenaFight(): bool {
     global $player;
 
     try {
-        $battle = new BattleManager($system, $player, $player->battle_id);
+        $battle = BattleManager::init($system, $player, $player->battle_id);
         $battle->checkInputAndRunTurn();
 
         $battle->renderBattle();
@@ -114,7 +114,7 @@ function arenaFightAPI(System $system, User $player): BattlePageAPIResponse {
     $response = new BattlePageAPIResponse();
 
     try {
-        $battle = new BattleManager(system: $system, player: $player, battle_id: $player->battle_id, is_api_request: true);
+        $battle = BattleManager::init(system: $system, player: $player, battle_id: $player->battle_id, spectate: true);
         $battle->checkInputAndRunTurn();
 
         $response->battle_data = $battle->getApiResponse();

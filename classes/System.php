@@ -301,11 +301,11 @@ class System {
     }
 
     /* function query(query) */
-    public function query($query, $debug = false) {
+    public function query($query, $debug = false): mysqli_result|bool {
         $query = trim($query);
 
         //Debugging
-        if($debug == true) {
+        if($debug) {
             echo $query;
             return false;
         }
